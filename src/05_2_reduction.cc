@@ -5,12 +5,12 @@
 #include <omp.h>
 
 int main() {
-  int n, sum = 0;
-  std::cin >> n;
-
   int num_of_threads;
   std::cin >> num_of_threads;
   omp_set_num_threads(num_of_threads);
+
+  int n, sum = 0;
+  std::cin >> n;
 
   float step = n / num_of_threads;
 
