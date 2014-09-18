@@ -14,6 +14,14 @@ compile: $(BIN)
 run: $(BIN)
 	./run.sh
 
+test: $(BIN)
+	./run.sh
+
+clean:
+	rm $(BIN)
+
+.PHONY: test
 
 $(BIN): $(BIN_DIR)/%: $(SRC_DIR)/%.cc
 	$(CC) $(FL) $< -o $@
+

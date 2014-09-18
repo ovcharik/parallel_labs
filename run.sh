@@ -13,7 +13,9 @@ function run_cmd {
     echo -e "$BLUE \bInputs:$RESET\n$(cat $2)\n$BLUE \bResult:$RESET"
     $1 < $2
   fi
+  result=$?
   [ $? -eq 0 ] && echo -e "$GREEN \bsuccess $RESET" || echo -e "$RED \bfail $RESET"
+  return $result
 }
 
 for bin in $(ls ./bin)
@@ -26,10 +28,10 @@ do
     for input in $(ls ./inputs | grep $bin)
     do
       inputf=./inputs/$input
-      run_cmd $cmd $inputf
+      run_cmd $cmd $inputf || exit
     done
   else
-    run_cmd $cmd
+    run_cmd $cmd || exit
   fi
   echo "-------------------------"
 done
