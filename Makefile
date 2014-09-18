@@ -18,7 +18,7 @@ test: $(BIN)
 	./run.sh
 
 clean:
-	rm $(BIN)
+	rm $(BIN_DIR)/*
 
 .PHONY: test
 
