@@ -15,7 +15,10 @@ int main() {
   #pragma omp parallel reduction(+:sum)
   {
     int curr = omp_get_thread_num();
-    for (int i = step * curr; i <= step * (curr + 1); i++) {
+    int start = step * curr;
+    int end = start + step;
+    if (curr == num_of_threads - 1) end = n;
+    for (int i = start + 1; i <= end; i++) {
       sum += i;
     }
 
