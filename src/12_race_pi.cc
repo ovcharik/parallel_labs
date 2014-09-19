@@ -13,9 +13,10 @@ int main() {
     #pragma omp for
     for (int i = 0; i < n; i++) {
       long double x = (i + 0.5) / n;
-
       #pragma omp critical
-      sum += 4 / (1 + std::pow(x, 2));
+      {
+        sum += 4 / (1 + std::pow(x, 2));
+      }
     }
   }
 
