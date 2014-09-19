@@ -1,4 +1,6 @@
-install: libcr-dev mpich2
+install:
+  - sudo apt-get update
+  - sudo apt-get install libcr-dev mpich2
 
 language: cpp
 
