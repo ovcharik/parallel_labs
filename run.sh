@@ -14,13 +14,13 @@ function exec_cmd {
     $1 < $2
   fi
   result=$?
-  [ $? -eq 0 ] && echo -e "$GREEN \bsuccess $RESET" || echo -e "$RED \bfail $RESET"
+  [ $result -eq 0 ] && echo -e "$GREEN \bsuccess $RESET" || echo -e "$RED \bfail $RESET"
   return $result
 }
 
 function run_cmd {
   echo "-------------------------"
-  echo -e "$BLUE \bexec $1 $RESET"
+  echo -e "$BLUE \b\$ $1 $RESET"
   if [ $(ls ./inputs | grep $2 | wc -l) -ge 1 ]
   then
     for input in $(ls ./inputs | grep $2)
