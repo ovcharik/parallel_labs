@@ -1,3 +1,5 @@
+install: libcr-dev mpich2
+
 language: cpp
 
 compiler:

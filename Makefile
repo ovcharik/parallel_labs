@@ -1,4 +1,4 @@
-CC=g++
+CC=mpic++
 FL=-std=c++0x -fopenmp
 
 SRC_DIR=src

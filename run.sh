@@ -5,7 +5,7 @@ GREEN="\E[32;1m"
 RED="\E[31;1m"
 RESET="\E[0m"
 
-function run_cmd {
+function exec_cmd {
   if [ $# -eq 1 ]
   then
     $1
@@ -18,20 +18,32 @@ function run_cmd {
   return $result
 }
 
+function run_cmd {
+  echo "-------------------------"
+  echo -e "$BLUE \bexec $1 $RESET"
+  if [ $(ls ./inputs | grep $2 | wc -l) -ge 1 ]
+  then
+    for input in $(ls ./inputs | grep $2)
+    do
+      inputf=./inputs/$input
+      exec_cmd "$1" $inputf || exit
+    done
+  else
+    exec_cmd "$1" || exit
+  fi
+}
+
 for bin in $(ls ./bin)
 do
   cmd=./bin/$bin
-  echo "-------------------------"
-  echo -e "$BLUE \bexec $cmd $RESET"
-  if [ $(ls ./inputs | grep $bin | wc -l) -ge 1 ]
+  if [ $(echo $cmd | grep "\.mpi$" | wc -l) -eq 1 ]
   then
-    for input in $(ls ./inputs | grep $bin)
+    for np in 2 4 5
     do
-      inputf=./inputs/$input
-      run_cmd $cmd $inputf || exit
+      cmd="mpiexec -np $np ./bin/$bin"
+      run_cmd "$cmd" $bin || exit
     done
   else
-    run_cmd $cmd || exit
+    run_cmd "$cmd" $bin || exit
   fi
-  echo "-------------------------"
 done

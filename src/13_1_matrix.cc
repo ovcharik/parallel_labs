@@ -3,7 +3,7 @@
 #include <ctime>
 #include <omp.h>
 
-#define ITERS   5
+#define ITERS   0
 #define SIZES   {100, 1000}
 #define THREADS {1, 2, 4, 6, 8, 10, 12}
 
