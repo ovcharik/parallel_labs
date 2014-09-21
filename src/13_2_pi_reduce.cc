@@ -4,7 +4,7 @@
 #include <cmath>
 #include <omp.h>
 
-#define ITERS   0
+#define ITERS   5
 #define SIZES   {100, 10000000/*, 4000000000*/}
 #define THREADS {1, 2, 4, 6, 8, 10, 12}
 
