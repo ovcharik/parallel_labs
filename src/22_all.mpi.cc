@@ -22,11 +22,8 @@ int main(int argc, char ** argv) {
   for (int i = 0, j = 0; i < size; i++) {
     if (i == rank) continue;
 
-    int s = size * rank + i;
-    int r = size * i + rank;
-
-    MPI_Isend(&rank,         1, MPI_INT, i, s, MPI_COMM_WORLD, &requests[j++]);
-    MPI_Irecv(&(secrets[i]), 1, MPI_INT, i, r, MPI_COMM_WORLD, &requests[j++]);
+    MPI_Isend(&rank,       1, MPI_INT, i, size * rank + i, MPI_COMM_WORLD, &requests[j++]);
+    MPI_Irecv(&secrets[i], 1, MPI_INT, i, size * i + rank, MPI_COMM_WORLD, &requests[j++]);
   }
   MPI_Waitall(count, requests, statuses);
 
